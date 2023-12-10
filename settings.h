@@ -14,3 +14,12 @@
 #define NTPSERVER1 "pool.ntp.org"
 #define NTPSERVER2 "time.nist.gov"
 #define TZ 1    // TimeZone, here GMT+1
+
+#define SEZONE "SE3"
+
+#define HTTP_PORT 80
+#define HTTP_METHOD "GET"
+//#define HOST_NAME "https://www.elprisetjustnu.se/api/v1/prices/2023/12-06_SE3.json"
+#define HOST_NAME "https://www.elprisetjustnu.se/api/v1/prices/"
+#define PATH_NAME ""
+
