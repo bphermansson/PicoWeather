@@ -22,4 +22,4 @@
 //#define HOST_NAME "https://www.elprisetjustnu.se/api/v1/prices/2023/12-06_SE3.json"
 #define HOST_NAME "https://www.elprisetjustnu.se/api/v1/prices/"
 #define PATH_NAME ""
-
+#define TIBBERURL "https://api.tibber.com/v1-beta/gql"

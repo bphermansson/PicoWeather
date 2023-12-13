@@ -5,6 +5,7 @@
 #include <WiFiClientSecureBearSSL.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include "../../token.h"
 
 WiFiClient client;
 
@@ -31,20 +32,24 @@ void wifi_connect(char *ipAddrPtr)
   strcpy(ipAddrPtr, IP);
 }
 
-String webserver_connect(char hostName[], int httpPort) {
-
+const char * webserverRequest(char question[]) {
+  String tibberUrl = TIBBERURL;
   std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);
   client->setInsecure();
   HTTPClient https;
 
-    if (https.begin(*client, hostName)) {  // HTTPS
-      int httpCode = https.GET();
+    if (https.begin(*client, tibberUrl)) {  
+      String tknSettings = TOKEN;
+      String tkn = "Bearer " + tknSettings;
+      https.addHeader("Authorization", tknSettings) ;
+      https.addHeader("Content-Type", "application/json");
+      int httpCode = https.POST(question);
+
         if (httpCode == 200) {
           String res = https.getString();
-          char *payload;
-          res.toCharArray(payload, sizeof(payload));
           https.end();
-        return res;
+          const char* buf = res.c_str();
+          return buf;
         }
       return "Error";
     }
